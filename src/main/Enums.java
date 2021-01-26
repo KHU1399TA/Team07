@@ -1,0 +1,32 @@
+package main;
+
+enum ActionResult{
+    
+    SUCCESS,
+    INVALID_USERNAME,
+    INVALID_PASSWORD,
+    USERNAME_NOT_FOUND,
+    USERNAME_ALREADY_EXIST,
+    FOOD_NOT_FOUND,
+    FOOD_ALREADY_EXIST,
+    ORDER_NOT_FOUND,
+    ORDER_ALREADY_EXIST,
+    UNKNOWN_ERROR;
+}
+
+enum AccessLevel{
+
+    MANAGER,
+    CASHIER,
+    CHEF,
+    DELIVERYMAN,
+    CLIENT;
+}
+
+enum OrderState{
+
+    MADE,
+    CONFIRMED,
+    COOKED,
+    DELIVERED;
+}
