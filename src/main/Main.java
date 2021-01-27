@@ -343,4 +343,106 @@ public class Main {
             }
         }
     }
+
+    private static void adduser() {
+
+        Scanner input = new Scanner(System.in);
+
+        m:
+        for (int i = 1; i > 0; i++) {
+
+            System.out.println("-".repeat(34));
+
+            System.out.print(" Enter your restaurant's name: ");
+            String restaurantname = input.next();
+
+            System.out.print(" Enter your restaurant's password: ");
+            String restaurantpass = input.next();
+
+            System.out.print(" Enter your firstname: ");
+            String firstname = input.next();
+
+            System.out.print(" Enter your lastname: ");
+            String lastname = input.next();
+
+            System.out.print(" Enter your phoneNumber: ");
+            String phoneNumber = input.next();
+
+            System.out.print(" Enter your username: ");
+            String username = input.next();
+
+            System.out.print(" Enter your password: ");
+            String password = input.next();
+
+            AccessLevel accesslevel = AccessLevel.NOTHING;
+
+            n:
+            for (int j = 1; j > 0; j++) {
+
+                System.out.println(" 1)deliveryman 2)cashier 3)chef");
+                System.out.print(" Enter access level(nmber): ");
+
+                String result = input.next();
+
+                accesslevel = switch (result) {
+                    case "1" ->
+                        AccessLevel.DELIVERYMAN;
+                    case "2" ->
+                        AccessLevel.CASHIER;
+                    case "3" ->
+                        AccessLevel.CHEF;
+                    default ->
+                        AccessLevel.NOTHING;
+                };
+
+                if (accesslevel.equals(Typeofrestaurant.NOTHING)) {
+                    System.out.println(" Error: enter the correct number");
+                    continue n;
+                } else {
+                    break n;
+                }
+            }
+            Date today = new Date();
+
+            Manager newuser = new Manager(firstname, lastname, phoneNumber,
+                    username, password, accesslevel, today, today);
+
+            n:
+            for (int j = 1; j > 0; j++) {
+
+                System.out.println("-".repeat(34));
+
+                System.out.print(" 1)Confirm 2)Cancel 0)Exit\n Select please: ");
+
+                String record = input.next();
+
+                switch (record) {
+
+                    case "1" -> {
+
+                        System.out.println(" Confirmed");
+                        //Manager.adduser(restaurantname, restaurantpass, newuser)
+                        System.out.println(Manager.adduser(restaurantname, restaurantpass, newuser));
+                        break m;
+                    }
+
+                    case "2" -> {
+                        System.out.println(" Canceled");
+                        continue m;
+                    }
+
+                    case "0" -> {
+
+                        break m;
+                    }
+
+                    default -> {
+
+                        System.out.println(" Error: enter the correct number");
+                        continue n;
+                    }
+                }
+            }
+        }
+    }
 }
