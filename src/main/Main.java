@@ -445,4 +445,56 @@ public class Main {
             }
         }
     }
+
+    private static void showrestaurantinfo() {
+
+        Scanner input = new Scanner(System.in);
+
+        m:
+        for (int i = 1; i > 0; i++) {
+
+            System.out.println("-".repeat(34));
+
+            System.out.print(" Enter your restaurant's name: ");
+            String restaurantname = input.next();
+
+            System.out.print(" Enter your restaurant's password: ");
+            String restaurantpass = input.next();
+
+            //Manager.showrestaurantinfo(restaurantname, restaurantpass);
+            System.out.println(Manager.showrestaurantinfo(restaurantname, restaurantpass));
+
+            if (Manager.showrestaurantinfo(restaurantname, restaurantpass).equals(ActionResult.SUCCESSSHOW)) {
+                break;
+            } else {
+                n:
+                for (int j = 1; j > 0; j++) {
+
+                    System.out.println("-".repeat(34));
+
+                    System.out.print(" 1)Try again 0)Exit\n Select please: ");
+
+                    String record = input.next();
+
+                    switch (record) {
+
+                        case "1" -> {
+
+                            continue m;
+                        }
+                        case "0" -> {
+
+                            break m;
+                        }
+
+                        default -> {
+
+                            System.out.println(" Error: enter the correct number");
+                            continue n;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
