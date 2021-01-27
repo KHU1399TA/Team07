@@ -67,4 +67,19 @@ public class Manager extends User {
 
         return ActionResult.RESTAURANT_NOT_FOUND;
     }
+
+    static ActionResult showrestaurantinfo(String restaurantname, String restaurantpass) {
+        
+        for (int i = 0; i < Restaurants.restaurants.size(); i++) {
+
+            if (Restaurants.restaurants.get(i).restaurantname.equals(restaurantname)
+                    && Restaurants.restaurants.get(i).restaurantpass.equals(restaurantpass)) {
+            
+                System.out.println(Restaurants.restaurants.get(i).toString());
+                return ActionResult.SUCCESSSHOW;
+            }
+        }
+        
+        return ActionResult.RESTAURANT_NOT_FOUND;
+    }
 }
