@@ -625,4 +625,101 @@ public class Main {
             }
         }
     }
+
+    private static void edituserinfo() {
+
+        Scanner input = new Scanner(System.in);
+
+        String edit = "";
+
+        m:
+        for (int i = 1; i > 0; i++) {
+
+            System.out.println("-".repeat(34));
+
+            System.out.print(" Enter your restaurant's name: ");
+            String restaurantname = input.next();
+
+            System.out.print(" Enter your restaurant's password: ");
+            String restaurantpass = input.next();
+
+            System.out.print(" Enter username: ");
+            String username = input.next();
+
+            System.out.print(" 1)Edit firstname 2)Edit lastname 3)Edit phonenumber "
+                    + "\n 4)Edit username 5)Edit password 6)Edit accesslevel 0)Exit\n select number: ");
+            String result = input.next();
+
+            AccessLevel accesslevel = AccessLevel.NOTHING;
+
+            switch (result) {
+
+                case "1" -> {
+                    System.out.print(" Enter a new firstname for edit:");
+                    edit = input.next();
+                    System.out.println(Manager.edituser(restaurantname, restaurantpass, username, edit, result, AccessLevel.CASHIER));
+                }
+                case "2" -> {
+                    System.out.print(" Enter a new lastname for edit:");
+                    edit = input.next();
+                    System.out.println(Manager.edituser(restaurantname, restaurantpass, username, edit, result, AccessLevel.CASHIER));
+                }
+                case "3" -> {
+                    System.out.print(" Enter a new phonenumber for edit:");
+                    edit = input.next();
+                    System.out.println(Manager.edituser(restaurantname, restaurantpass, username, edit, result, AccessLevel.CASHIER));
+                }
+                case "4" -> {
+                    System.out.print(" Enter a new username for edit:");
+                    edit = input.next();
+                    System.out.println(Manager.edituser(restaurantname, restaurantpass, username, edit, result, AccessLevel.CASHIER));
+                }
+                case "5" -> {
+                    System.out.print(" Enter a new password for edit:");
+                    edit = input.next();
+                    System.out.println(Manager.edituser(restaurantname, restaurantpass, username, edit, result, AccessLevel.CASHIER));
+                }
+                case "6" -> {
+
+                    n:
+                    for (int j = 1; j > 0; j++) {
+
+                        System.out.println(" 1)deliveryman 2)cashier 3)chef");
+                        System.out.print(" Enter access level(nmber): ");
+
+                        String result1 = input.next();
+
+                        accesslevel = switch (result1) {
+                            case "1" ->
+                                AccessLevel.DELIVERYMAN;
+                            case "2" ->
+                                AccessLevel.CASHIER;
+                            case "3" ->
+                                AccessLevel.CHEF;
+                            default ->
+                                AccessLevel.NOTHING;
+                        };
+
+                        if (accesslevel.equals(Typeofrestaurant.NOTHING)) {
+                            System.out.println(" Error: enter the correct number");
+                            continue n;
+                        } else {
+                            break n;
+                        }
+                    }
+                    System.out.println(Manager.edituser(restaurantname, restaurantpass, username, edit, result, accesslevel));
+                }
+                case "0" -> {
+
+                    break m;
+                }
+
+                default -> {
+
+                    System.out.println(" Error: enter the correct number");
+                    continue m;
+                }
+            }
+        }
+    }
 }
