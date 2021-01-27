@@ -106,4 +106,27 @@ public class Manager extends User {
         
         return ActionResult.RESTAURANT_NOT_FOUND;
     }
+
+    static ActionResult editrestaurant(String restaurantname, String restaurantpass, String edit, String result, Typeofrestaurant typeofrestaurant) {
+
+        for (int i = 0; i < Restaurants.restaurants.size(); i++) {
+
+            if (Restaurants.restaurants.get(i).restaurantname.equals(restaurantname)
+                    && Restaurants.restaurants.get(i).restaurantpass.equals(restaurantpass)) {
+
+                switch (result) {
+                    case "1" ->
+                        Restaurants.restaurants.get(i).restaurantname = restaurantname;
+                    case "2" ->
+                        Restaurants.restaurants.get(i).typeofrestaurant = typeofrestaurant;
+                    default ->
+                        System.out.println(" Error: enter the correct number");
+                }
+
+                return ActionResult.SUCCESSEDIT;
+            }
+        }
+
+        return ActionResult.RESTAURANT_NOT_FOUND;
+    }
 }
