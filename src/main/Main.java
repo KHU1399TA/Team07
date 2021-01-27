@@ -4,6 +4,8 @@ import java.util.*;
 
 public class Main {
 
+    private static boolean result = true;
+
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
@@ -59,22 +61,90 @@ public class Main {
 
                 case "1" -> {
 
+                    result = true;
                     newmanager();
                     break;
                 }
 
                 case "2" -> {
 
+                    result = true;
                     loginmanager();
                     break;
                 }
 
                 case "0" -> {
 
+                    result = false;
                     break m;
                 }
 
                 default -> System.out.println(" Error: enter the correct number");
+            }
+        }
+
+        if (result) {
+
+            for (int i = 1; i > 0; i++) {
+
+                System.out.println("-".repeat(34));
+
+                System.out.print(" 1)Add restaurant 2)Add user 3)Show restauarnt information"
+                        + "\n 4)Show user information 5)Edit restauarnt information"
+                        + "\n 6)Edit user information 7)Remove restaurant 8)Remove user"
+                        + "\n 0)Exit\n select number: ");
+
+                String manager = input.next();
+
+                switch (manager) {
+
+                    case "1" -> {
+
+                        addrestaurant();
+                        break;
+                    }
+                    case "2" -> {
+
+                        adduser();
+                        break;
+                    }
+                    case "3" -> {
+
+                        showrestaurantinfo();
+                        break;
+                    }
+                    case "4" -> {
+
+                        showuserinfo();
+                        break;
+                    }
+                    case "5" -> {
+
+                        editrestaurantinfo();
+                        break;
+                    }
+                    case "6" -> {
+
+                        edituserinfo();
+                        break;
+                    }
+                    case "7" -> {
+
+                        removerestaurant();
+                        break;
+                    }
+                    case "8" -> {
+
+                        removeuser();
+                        break;
+                    }
+                    case "0" -> {
+
+                        break;
+                    }
+                    default ->
+                        System.out.println(" Error: enter the correct number");
+                }
             }
         }
     }
@@ -181,7 +251,9 @@ public class Main {
                         }
 
                         if (sizearrres == Restaurants.restaurants.size() + 1
-                                && sizearruser == Restaurants.restaurants.get(k).users.size()) {
+                        && sizearruser == Restaurants.restaurants.get(k).users.size()) {
+
+                            result = true;
                         }
 
                         break m;
@@ -190,11 +262,13 @@ public class Main {
                     case "2" -> {
 
                         System.out.println(" Canceled");
+                        result = false;
                         continue m;
                     }
 
                     case "0" -> {
 
+                        result = false;
                         break m;
                     }
 
@@ -236,13 +310,16 @@ public class Main {
 
                     if (User.login(restaurantname, username, password).equals(ActionResult.SUCCESSLOGIN)) {
 
+                        result = true;
                         break m;
                     }
 
+                    result = false;
                     break;
                 }
                 case "0" -> {
 
+                    result = false;
                     break m;
                 }
 
