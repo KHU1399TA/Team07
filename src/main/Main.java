@@ -319,7 +319,6 @@ public class Main {
                     case "1" -> {
 
                         System.out.println(" Confirmed");
-                        //Manager.addrestaurant(newrestaorant)
                         System.out.println(Manager.addrestaurant(newrestaorant));
                         break m;
                     }
@@ -421,7 +420,6 @@ public class Main {
                     case "1" -> {
 
                         System.out.println(" Confirmed");
-                        //Manager.adduser(restaurantname, restaurantpass, newuser)
                         System.out.println(Manager.adduser(restaurantname, restaurantpass, newuser));
                         break m;
                     }
@@ -461,7 +459,6 @@ public class Main {
             System.out.print(" Enter your restaurant's password: ");
             String restaurantpass = input.next();
 
-            //Manager.showrestaurantinfo(restaurantname, restaurantpass);
             System.out.println(Manager.showrestaurantinfo(restaurantname, restaurantpass));
 
             if (Manager.showrestaurantinfo(restaurantname, restaurantpass).equals(ActionResult.SUCCESSSHOW)) {
@@ -516,7 +513,6 @@ public class Main {
             System.out.print(" Enter username: ");
             String username = input.next();
 
-            //Manager.showrestaurantinfo(restaurantname, restaurantpass);
             System.out.println(Manager.showuserinfo(restaurantname, restaurantpass, username));
 
             if (Manager.showuserinfo(restaurantname, restaurantpass, username).equals(ActionResult.SUCCESSSHOW)) {
@@ -548,6 +544,83 @@ public class Main {
                             continue n;
                         }
                     }
+                }
+            }
+        }
+    }
+
+    private static void editrestaurantinfo() {
+
+        Scanner input = new Scanner(System.in);
+
+        String edit = "";
+
+        m:
+        for (int i = 1; i > 0; i++) {
+
+            System.out.println("-".repeat(34));
+
+            System.out.print(" Enter your restaurant's name: ");
+            String restaurantname = input.next();
+
+            System.out.print(" Enter your restaurant's password: ");
+            String restaurantpass = input.next();
+
+            System.out.print(" 1)Edit restaurant's name 2)Edit type of restaurant 0)Exit\n select number: ");
+            String result = input.next();
+
+            Typeofrestaurant typeofrestaurant = Typeofrestaurant.NOTHING;
+
+            switch (result) {
+
+                case "1" -> {
+                    System.out.print(" Enter a new word for edit:");
+                    edit = input.next();
+                    System.out.println(Manager.editrestaurant(restaurantname, restaurantpass, edit, result, Typeofrestaurant.FASTCASUAL));
+                }
+                case "2" -> {
+
+                    n:
+                    for (int j = 1; j > 0; j++) {
+
+                        System.out.println(" 1)fast food 2)Fast Casual 3)Casual Dining 4)Casual Premium 5)Fine-Dining");
+                        System.out.print(" Enter type of restaurant(nmber): ");
+
+                        String result1 = input.next();
+
+                        typeofrestaurant = switch (result1) {
+                            case "1" ->
+                                Typeofrestaurant.FASTFOOD;
+                            case "2" ->
+                                Typeofrestaurant.FASTCASUAL;
+                            case "3" ->
+                                Typeofrestaurant.CASUALDINING;
+                            case "4" ->
+                                Typeofrestaurant.CASUALPREMIUM;
+                            case "5" ->
+                                Typeofrestaurant.FINEDINING;
+                            default ->
+                                Typeofrestaurant.NOTHING;
+                        };
+
+                        if (typeofrestaurant.equals(Typeofrestaurant.NOTHING)) {
+                            System.out.println(" Error: enter the correct number");
+                            continue n;
+                        } else {
+                            break n;
+                        }
+                    }
+                    System.out.println(Manager.editrestaurant(restaurantname, restaurantpass, edit, result, typeofrestaurant));
+                }
+                case "0" -> {
+
+                    break m;
+                }
+
+                default -> {
+
+                    System.out.println(" Error: enter the correct number");
+                    continue m;
                 }
             }
         }
