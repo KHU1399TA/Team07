@@ -722,4 +722,26 @@ public class Main {
             }
         }
     }
+
+    private static void removerestaurant() {
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.print(" Enter your restaurant's name: ");
+        String restaurantname = input.next();
+
+        System.out.print(" Enter your restaurant's password: ");
+        String restaurantpass = input.next();
+        
+        System.out.print(" Are you sure? 1)yes 2)no \n select number: ");
+        String result = input.next();
+        
+        switch(result){
+            
+            case "1" -> System.out.println(Manager.removerestaurant(restaurantname, restaurantpass));
+            case "2" -> System.out.println(" canceled");
+            default -> System.out.println(" Error: enter the correct number, try again");
+        }
+        input.close();
+    }
 }
