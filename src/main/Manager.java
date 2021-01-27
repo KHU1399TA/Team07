@@ -129,4 +129,43 @@ public class Manager extends User {
 
         return ActionResult.RESTAURANT_NOT_FOUND;
     }
+
+    static ActionResult edituser(String restaurantname, String restaurantpass, String username, String edit, String result, AccessLevel accessLevel) {
+
+        for (int i = 0; i < Restaurants.restaurants.size(); i++) {
+
+            if (Restaurants.restaurants.get(i).restaurantname.equals(restaurantname)
+                    && Restaurants.restaurants.get(i).restaurantpass.equals(restaurantpass)) {
+
+                for (int j = 0; j < Restaurants.restaurants.get(i).users.size(); j++) {
+
+                    if (Restaurants.restaurants.get(i).users.get(j).username.equals(username)) {
+
+                        switch (result) {
+                            case "1" ->
+                                Restaurants.restaurants.get(i).users.get(j).firstName = edit;
+                            case "2" ->
+                                Restaurants.restaurants.get(i).users.get(j).lastName = edit;
+                            case "3" ->
+                                Restaurants.restaurants.get(i).users.get(j).phoneNumber = edit;
+                            case "4" ->
+                                Restaurants.restaurants.get(i).users.get(j).username = edit;
+                            case "5" ->
+                                Restaurants.restaurants.get(i).users.get(j).password = edit;
+                            case "6" ->
+                                Restaurants.restaurants.get(i).users.get(j).accessLevel = accessLevel;
+                            default ->
+                                System.out.println(" Error: enter the correct number");
+                        }
+
+                        return ActionResult.SUCCESSEDIT;
+                    }
+                }
+
+                return ActionResult.USERNAME_NOT_FOUND;
+            }
+        }
+
+        return ActionResult.RESTAURANT_NOT_FOUND;
+    }
 }
