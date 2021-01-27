@@ -183,4 +183,28 @@ public class Manager extends User {
         
         return ActionResult.RESTAURANT_NOT_FOUND;
     }
+
+    static ActionResult removeuser(String restaurantname, String restaurantpass, String username) {
+
+        for (int i = 0; i < Restaurants.restaurants.size(); i++) {
+
+            if (Restaurants.restaurants.get(i).restaurantname.equals(restaurantname)
+                    && Restaurants.restaurants.get(i).restaurantpass.equals(restaurantpass)) {
+            
+                for (int j = 0; j < Restaurants.restaurants.get(i).users.size(); j++) {
+                    
+                    if (Restaurants.restaurants.get(i).users.get(j).username.equals(username)) {
+                        
+                        Restaurants.restaurants.get(i).users.remove(j);
+                        return ActionResult.SUCCESSREMOVE;
+                    }
+                    
+                }                    
+                
+                return ActionResult.USERNAME_NOT_FOUND;
+            }
+        }
+        
+        return ActionResult.RESTAURANT_NOT_FOUND;
+    }
 }
