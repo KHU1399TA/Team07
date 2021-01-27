@@ -38,11 +38,11 @@ public abstract class User {
                     if (Restaurants.restaurants.get(i).users.get(j).username.equals(username)
                             && Restaurants.restaurants.get(i).users.get(j).password.equals(password)) {
 
-                        System.out.println("-".repeat(34) + "\n Wellcome\t" + Restaurants.restaurants.get(i).users.get(j).firstName
-                                + " " + Restaurants.restaurants.get(i).users.get(j).lastName);
-
                         Date today = new Date();
                         Restaurants.restaurants.get(i).users.get(j).lastLoginDate = today;
+
+                        System.out.println("-".repeat(34) + "\n Wellcome\t" + Restaurants.restaurants.get(i).users.get(j).firstName
+                                + " " + Restaurants.restaurants.get(i).users.get(j).lastName);
 
                         return ActionResult.SUCCESSLOGIN;
                     }
