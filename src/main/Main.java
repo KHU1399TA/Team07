@@ -254,4 +254,93 @@ public class Main {
             }
         }
     }
+
+    private static void addrestaurant() {
+
+        Scanner input = new Scanner(System.in);
+
+        m:
+        for (int i = 1; i > 0; i++) {
+
+            System.out.println("-".repeat(34));
+
+            System.out.print(" Enter your restaurant's name: ");
+            String restaurantname = input.next();
+
+            System.out.print(" Enter your restaurant's password: ");
+            String restaurantpass = input.next();
+
+            Typeofrestaurant typeofrestaurant = Typeofrestaurant.NOTHING;
+
+            n:
+            for (int j = 1; j > 0; j++) {
+
+                System.out.println(" 1)fast food 2)Fast Casual 3)Casual Dining 4)Casual Premium 5)Fine-Dining");
+                System.out.print(" Enter type of restaurant(nmber): ");
+
+                String result = input.next();
+
+                typeofrestaurant = switch (result) {
+                    case "1" ->
+                        Typeofrestaurant.FASTFOOD;
+                    case "2" ->
+                        Typeofrestaurant.FASTCASUAL;
+                    case "3" ->
+                        Typeofrestaurant.CASUALDINING;
+                    case "4" ->
+                        Typeofrestaurant.CASUALPREMIUM;
+                    case "5" ->
+                        Typeofrestaurant.FINEDINING;
+                    default ->
+                        Typeofrestaurant.NOTHING;
+                };
+
+                if (typeofrestaurant.equals(Typeofrestaurant.NOTHING)) {
+                    System.out.println(" Error: enter the correct number");
+                    continue n;
+                } else {
+                    break n;
+                }
+            }
+            Restaurant newrestaorant = new Restaurant(restaurantname, restaurantpass, typeofrestaurant);
+            System.out.println(newrestaorant.toString());
+
+            n:
+            for (int j = 1; j > 0; j++) {
+
+                System.out.println("-".repeat(34));
+
+                System.out.print(" 1)Confirm 2)Cancel 0)Exit\n Select please: ");
+
+                String record = input.next();
+
+                switch (record) {
+
+                    case "1" -> {
+
+                        System.out.println(" Confirmed");
+                        //Manager.addrestaurant(newrestaorant)
+                        System.out.println(Manager.addrestaurant(newrestaorant));
+                        break m;
+                    }
+
+                    case "2" -> {
+                        System.out.println(" Canceled");
+                        continue m;
+                    }
+
+                    case "0" -> {
+
+                        break m;
+                    }
+
+                    default -> {
+
+                        System.out.println(" Error: enter the correct number");
+                        continue n;
+                    }
+                }
+            }
+        }
+    }
 }
