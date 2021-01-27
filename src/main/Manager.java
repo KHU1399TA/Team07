@@ -36,4 +36,35 @@ public class Manager extends User {
         
         return ActionResult.UNKNOWN_ERROR;
     }
+
+    static ActionResult adduser(String restaurantname,String restaurantpass, User user) {
+
+        for (int i = 0; i < Restaurants.restaurants.size(); i++) {
+
+            if (Restaurants.restaurants.get(i).restaurantname.equals(restaurantname)) {
+
+                boolean security = true;
+
+                for (int j = 0; j < Restaurants.restaurants.get(i).users.size(); j++) {
+
+                    if (Restaurants.restaurants.get(i).users.get(j).username.equals(user.username)) {
+
+                        security = false;
+                        break;
+                    }
+                }
+
+                if (security) {
+
+                    Restaurants.restaurants.get(i).users.add(user);
+                    return ActionResult.SUCCESSADDUSER;
+                } else {
+
+                    return ActionResult.USERNAME_ALREADY_EXIST;
+                }
+            }
+        }
+
+        return ActionResult.RESTAURANT_NOT_FOUND;
+    }
 }
