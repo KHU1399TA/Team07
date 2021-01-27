@@ -25,7 +25,7 @@ public class Main {
 
                 case "1" -> {
 
-                    //manager();
+                    manager();
                     break;
                 }
                 //case "2" -> System.out.println("-".repeat(28) + " \nplease login");
@@ -44,4 +44,38 @@ public class Main {
         //clear codes
     }
 
+    private static void manager() {
+
+        Scanner input = new Scanner(System.in);
+
+        m:
+        for (int i = 1; i > 0; i++) {
+
+            System.out.println("-".repeat(34));
+
+            System.out.print(" 1)new manager 2)old manager 0)Exit\n select number: ");
+
+            String newmanager = input.next();
+
+            switch (newmanager) {
+
+                case "1" -> {
+
+                    //newmanager();
+                    break m;
+                }
+                case "2" -> {
+
+                    //oldmanager();
+                    break m;
+                }
+                case "0" -> {
+
+                    break m;
+                }
+                default ->
+                    System.out.println(" Error: enter the correct number");
+            }
+        }
+    }
 }
