@@ -36,7 +36,7 @@ public class Main {
 
                     break m;
                 }
-                
+
                 default -> System.out.println(" Error: enter the correct number");
             }
         }
@@ -61,15 +61,15 @@ public class Main {
 
                 case "1" -> {
 
-                    result = true;
                     newmanager();
+                    if(result)break m;
                     break;
                 }
 
                 case "2" -> {
 
-                    result = true;
                     loginmanager();
+                    if(result)break m;
                     break;
                 }
 
@@ -85,14 +85,14 @@ public class Main {
 
         if (result) {
 
-            for (int i = 1; i > 0; i++) {
+            m:for (int i = 1; i > 0; i++) {
 
                 System.out.println("-".repeat(34));
 
                 System.out.print(" 1)Add restaurant 2)Add user 3)Show restauarnt information"
                         + "\n 4)Show user information 5)Edit restauarnt information"
                         + "\n 6)Edit user information 7)Remove restaurant 8)Remove user"
-                        + "\n 0)Exit\n select number: ");
+                        + "\n 0)Logout\n select number: ");
 
                 String manager = input.next();
 
@@ -140,10 +140,9 @@ public class Main {
                     }
                     case "0" -> {
 
-                        break;
+                        break m;
                     }
-                    default ->
-                        System.out.println(" Error: enter the correct number");
+                    default -> System.out.println(" Error: enter the correct number");
                 }
             }
         }
@@ -232,30 +231,34 @@ public class Main {
 
                     case "1" -> {
 
-                        System.out.println(" Confirmed");
-
                         long sizearrres = Restaurants.restaurants.size();
                         long sizearruser = 0;
-                        int k;
 
                         Restaurants.restaurants.add(newrestaorant);
 
-                        for (k = 0; k < Restaurants.restaurants.size(); k++) {
+                        for (int k = 0; k < Restaurants.restaurants.size(); k++) {
 
                             if (Restaurants.restaurants.get(k).restaurantname.equals(restaurantname)) {
 
                                 sizearruser = Restaurants.restaurants.get(k).users.size();
                                 Restaurants.restaurants.get(k).users.add(newmanager);
-                                break;
+
+                                if (sizearrres == Restaurants.restaurants.size() - 1
+                                        && sizearruser == Restaurants.restaurants.get(k).users.size() - 1) {
+
+                                    System.out.println(" Confirmed");
+                                    result = true;
+                                    break m;
+                                } else {
+
+                                    result = false;
+                                    break;
+                                }
                             }
                         }
 
-                        if (sizearrres == Restaurants.restaurants.size() + 1
-                        && sizearruser == Restaurants.restaurants.get(k).users.size()) {
-
-                            result = true;
-                        }
-
+                        result = false;
+                        System.out.println(" Not confirm");
                         break m;
                     }
 
@@ -274,6 +277,7 @@ public class Main {
 
                     default -> {
 
+                        result = false;
                         System.out.println(" Error: enter the correct number");
                         continue n;
                     }
@@ -289,7 +293,7 @@ public class Main {
 
         m: for (int i = 1; i > 0; i++) {
 
-            System.out.println("-".repeat(34) + " \n 1)Login 0)exit\n select number: ");
+            System.out.print("-".repeat(34) + " \n 1)Login 0)exit\n select number: ");
 
             String login = input.next();
 
@@ -305,6 +309,8 @@ public class Main {
 
                     System.out.print(" Enter password: ");
                     String password = input.next();
+
+                    System.out.println("-".repeat(34) + "\n    Wellcome");
 
                     System.out.println(User.login(restaurantname, username, password));
 
@@ -325,6 +331,7 @@ public class Main {
 
                 default -> {
 
+                    result = false;
                     System.out.println(" Error: enter the correct number");
                     continue m;
                 }
@@ -336,40 +343,32 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
 
-        m:
-        for (int i = 1; i > 0; i++) {
+        m: for (int i = 1; i > 0; i++) {
 
             System.out.println("-".repeat(34));
 
-            System.out.print(" Enter your restaurant's name: ");
+            System.out.print(" Enter new restaurant's name: ");
             String restaurantname = input.next();
 
-            System.out.print(" Enter your restaurant's password: ");
+            System.out.print(" Enter new restaurant's password: ");
             String restaurantpass = input.next();
 
             Typeofrestaurant typeofrestaurant = Typeofrestaurant.NOTHING;
 
-            n:
-            for (int j = 1; j > 0; j++) {
+            n: for (int j = 1; j > 0; j++) {
 
-                System.out.println(" 1)fast food 2)Fast Casual 3)Casual Dining 4)Casual Premium 5)Fine-Dining");
-                System.out.print(" Enter type of restaurant(nmber): ");
+                System.out.println(" 1)Fast Food 2)Fast Casual 3)Casual Dining 4)Casual Premium 5)Fine-Dining");
+                System.out.print(" Enter type of new restaurant(nmber): ");
 
                 String result = input.next();
 
                 typeofrestaurant = switch (result) {
-                    case "1" ->
-                        Typeofrestaurant.FASTFOOD;
-                    case "2" ->
-                        Typeofrestaurant.FASTCASUAL;
-                    case "3" ->
-                        Typeofrestaurant.CASUALDINING;
-                    case "4" ->
-                        Typeofrestaurant.CASUALPREMIUM;
-                    case "5" ->
-                        Typeofrestaurant.FINEDINING;
-                    default ->
-                        Typeofrestaurant.NOTHING;
+                    case "1" -> Typeofrestaurant.FASTFOOD;
+                    case "2" -> Typeofrestaurant.FASTCASUAL;
+                    case "3" -> Typeofrestaurant.CASUALDINING;
+                    case "4" -> Typeofrestaurant.CASUALPREMIUM;
+                    case "5" -> Typeofrestaurant.FINEDINING;
+                    default -> Typeofrestaurant.NOTHING;
                 };
 
                 if (typeofrestaurant.equals(Typeofrestaurant.NOTHING)) {
@@ -382,8 +381,7 @@ public class Main {
             Restaurant newrestaorant = new Restaurant(restaurantname, restaurantpass, typeofrestaurant);
             System.out.println(newrestaorant.toString());
 
-            n:
-            for (int j = 1; j > 0; j++) {
+            n: for (int j = 1; j > 0; j++) {
 
                 System.out.println("-".repeat(34));
 
@@ -424,8 +422,7 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
 
-        m:
-        for (int i = 1; i > 0; i++) {
+        m: for (int i = 1; i > 0; i++) {
 
             System.out.println("-".repeat(34));
 
@@ -435,43 +432,38 @@ public class Main {
             System.out.print(" Enter your restaurant's password: ");
             String restaurantpass = input.next();
 
-            System.out.print(" Enter your firstname: ");
+            System.out.print(" Enter user's firstname: ");
             String firstname = input.next();
 
-            System.out.print(" Enter your lastname: ");
+            System.out.print(" Enter user's lastname: ");
             String lastname = input.next();
 
-            System.out.print(" Enter your phoneNumber: ");
+            System.out.print(" Enter user's phoneNumber: ");
             String phoneNumber = input.next();
 
-            System.out.print(" Enter your username: ");
+            System.out.print(" Enter user's username: ");
             String username = input.next();
 
-            System.out.print(" Enter your password: ");
+            System.out.print(" Enter user's password: ");
             String password = input.next();
 
             AccessLevel accesslevel = AccessLevel.NOTHING;
 
-            n:
-            for (int j = 1; j > 0; j++) {
+            n: for (int j = 1; j > 0; j++) {
 
                 System.out.println(" 1)deliveryman 2)cashier 3)chef");
-                System.out.print(" Enter access level(nmber): ");
+                System.out.print(" Enter user's accesslevel(nmber): ");
 
                 String result = input.next();
 
                 accesslevel = switch (result) {
-                    case "1" ->
-                        AccessLevel.DELIVERYMAN;
-                    case "2" ->
-                        AccessLevel.CASHIER;
-                    case "3" ->
-                        AccessLevel.CHEF;
-                    default ->
-                        AccessLevel.NOTHING;
+                    case "1" -> AccessLevel.DELIVERYMAN;
+                    case "2" -> AccessLevel.CASHIER;
+                    case "3" -> AccessLevel.CHEF;
+                    default -> AccessLevel.NOTHING;
                 };
 
-                if (accesslevel.equals(Typeofrestaurant.NOTHING)) {
+                if (accesslevel.equals(AccessLevel.NOTHING)) {
                     System.out.println(" Error: enter the correct number");
                     continue n;
                 } else {
@@ -480,11 +472,10 @@ public class Main {
             }
             Date today = new Date();
 
-            Manager newuser = new Manager(firstname, lastname, phoneNumber,
-                    username, password, accesslevel, today, today);
+            Manager newuser = new Manager(firstname, lastname, phoneNumber, username, password, accesslevel, today,
+                    today);
 
-            n:
-            for (int j = 1; j > 0; j++) {
+            n: for (int j = 1; j > 0; j++) {
 
                 System.out.println("-".repeat(34));
 
@@ -525,8 +516,7 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
 
-        m:
-        for (int i = 1; i > 0; i++) {
+        m: for (int i = 1; i > 0; i++) {
 
             System.out.println("-".repeat(34));
 
@@ -536,13 +526,13 @@ public class Main {
             System.out.print(" Enter your restaurant's password: ");
             String restaurantpass = input.next();
 
-            System.out.println(Manager.showrestaurantinfo(restaurantname, restaurantpass));
-
             if (Manager.showrestaurantinfo(restaurantname, restaurantpass).equals(ActionResult.SUCCESSSHOW)) {
                 break;
             } else {
-                n:
-                for (int j = 1; j > 0; j++) {
+
+                System.out.println(Manager.showrestaurantinfo(restaurantname, restaurantpass));
+
+                n: for (int j = 1; j > 0; j++) {
 
                     System.out.println("-".repeat(34));
 
@@ -576,8 +566,7 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
 
-        m:
-        for (int i = 1; i > 0; i++) {
+        m: for (int i = 1; i > 0; i++) {
 
             System.out.println("-".repeat(34));
 
@@ -590,13 +579,13 @@ public class Main {
             System.out.print(" Enter username: ");
             String username = input.next();
 
-            System.out.println(Manager.showuserinfo(restaurantname, restaurantpass, username));
-
             if (Manager.showuserinfo(restaurantname, restaurantpass, username).equals(ActionResult.SUCCESSSHOW)) {
                 break;
             } else {
-                n:
-                for (int j = 1; j > 0; j++) {
+
+                System.out.println(Manager.showuserinfo(restaurantname, restaurantpass, username));
+
+                n: for (int j = 1; j > 0; j++) {
 
                     System.out.println("-".repeat(34));
 
@@ -632,8 +621,7 @@ public class Main {
 
         String edit = "";
 
-        m:
-        for (int i = 1; i > 0; i++) {
+        m: for (int i = 1; i > 0; i++) {
 
             System.out.println("-".repeat(34));
 
@@ -651,14 +639,15 @@ public class Main {
             switch (result) {
 
                 case "1" -> {
-                    System.out.print(" Enter a new word for edit:");
+                    System.out.print(" Enter new restaurant's name for edit: ");
                     edit = input.next();
-                    System.out.println(Manager.editrestaurant(restaurantname, restaurantpass, edit, result, Typeofrestaurant.FASTCASUAL));
+                    System.out.println(Manager.editrestaurant(restaurantname, restaurantpass, edit, result,
+                            Typeofrestaurant.FASTCASUAL));
+                    break m;
                 }
                 case "2" -> {
 
-                    n:
-                    for (int j = 1; j > 0; j++) {
+                    n: for (int j = 1; j > 0; j++) {
 
                         System.out.println(" 1)fast food 2)Fast Casual 3)Casual Dining 4)Casual Premium 5)Fine-Dining");
                         System.out.print(" Enter type of restaurant(nmber): ");
@@ -666,18 +655,12 @@ public class Main {
                         String result1 = input.next();
 
                         typeofrestaurant = switch (result1) {
-                            case "1" ->
-                                Typeofrestaurant.FASTFOOD;
-                            case "2" ->
-                                Typeofrestaurant.FASTCASUAL;
-                            case "3" ->
-                                Typeofrestaurant.CASUALDINING;
-                            case "4" ->
-                                Typeofrestaurant.CASUALPREMIUM;
-                            case "5" ->
-                                Typeofrestaurant.FINEDINING;
-                            default ->
-                                Typeofrestaurant.NOTHING;
+                            case "1" -> Typeofrestaurant.FASTFOOD;
+                            case "2" -> Typeofrestaurant.FASTCASUAL;
+                            case "3" -> Typeofrestaurant.CASUALDINING;
+                            case "4" -> Typeofrestaurant.CASUALPREMIUM;
+                            case "5" -> Typeofrestaurant.FINEDINING;
+                            default -> Typeofrestaurant.NOTHING;
                         };
 
                         if (typeofrestaurant.equals(Typeofrestaurant.NOTHING)) {
@@ -688,6 +671,7 @@ public class Main {
                         }
                     }
                     System.out.println(Manager.editrestaurant(restaurantname, restaurantpass, edit, result, typeofrestaurant));
+                    break m;
                 }
                 case "0" -> {
 
@@ -709,8 +693,7 @@ public class Main {
 
         String edit = "";
 
-        m:
-        for (int i = 1; i > 0; i++) {
+        m: for (int i = 1; i > 0; i++) {
 
             System.out.println("-".repeat(34));
 
@@ -732,34 +715,45 @@ public class Main {
             switch (result) {
 
                 case "1" -> {
-                    System.out.print(" Enter a new firstname for edit:");
+
+                    System.out.print(" Enter a new firstname for edit: ");
                     edit = input.next();
-                    System.out.println(Manager.edituser(restaurantname, restaurantpass, username, edit, result, AccessLevel.CASHIER));
+                    System.out.println(Manager.edituser(restaurantname, restaurantpass, username, edit, result,
+                            AccessLevel.CASHIER));
+                    break m;
                 }
+
                 case "2" -> {
-                    System.out.print(" Enter a new lastname for edit:");
+                    System.out.print(" Enter a new lastname for edit: ");
                     edit = input.next();
-                    System.out.println(Manager.edituser(restaurantname, restaurantpass, username, edit, result, AccessLevel.CASHIER));
+                    System.out.println(Manager.edituser(restaurantname, restaurantpass, username, edit, result,
+                            AccessLevel.CASHIER));
+                    break m;
                 }
                 case "3" -> {
-                    System.out.print(" Enter a new phonenumber for edit:");
+                    System.out.print(" Enter a new phonenumber for edit: ");
                     edit = input.next();
-                    System.out.println(Manager.edituser(restaurantname, restaurantpass, username, edit, result, AccessLevel.CASHIER));
+                    System.out.println(Manager.edituser(restaurantname, restaurantpass, username, edit, result,
+                            AccessLevel.CASHIER));
+                    break m;
                 }
                 case "4" -> {
-                    System.out.print(" Enter a new username for edit:");
+                    System.out.print(" Enter a new username for edit: ");
                     edit = input.next();
-                    System.out.println(Manager.edituser(restaurantname, restaurantpass, username, edit, result, AccessLevel.CASHIER));
+                    System.out.println(Manager.edituser(restaurantname, restaurantpass, username, edit, result,
+                            AccessLevel.CASHIER));
+                    break m;
                 }
                 case "5" -> {
-                    System.out.print(" Enter a new password for edit:");
+                    System.out.print(" Enter a new password for edit: ");
                     edit = input.next();
-                    System.out.println(Manager.edituser(restaurantname, restaurantpass, username, edit, result, AccessLevel.CASHIER));
+                    System.out.println(Manager.edituser(restaurantname, restaurantpass, username, edit, result,
+                            AccessLevel.CASHIER));
+                    break m;
                 }
                 case "6" -> {
 
-                    n:
-                    for (int j = 1; j > 0; j++) {
+                    n: for (int j = 1; j > 0; j++) {
 
                         System.out.println(" 1)deliveryman 2)cashier 3)chef");
                         System.out.print(" Enter access level(nmber): ");
@@ -767,24 +761,22 @@ public class Main {
                         String result1 = input.next();
 
                         accesslevel = switch (result1) {
-                            case "1" ->
-                                AccessLevel.DELIVERYMAN;
-                            case "2" ->
-                                AccessLevel.CASHIER;
-                            case "3" ->
-                                AccessLevel.CHEF;
-                            default ->
-                                AccessLevel.NOTHING;
+                            case "1" -> AccessLevel.DELIVERYMAN;
+                            case "2" -> AccessLevel.CASHIER;
+                            case "3" -> AccessLevel.CHEF;
+                            default -> AccessLevel.NOTHING;
                         };
 
-                        if (accesslevel.equals(Typeofrestaurant.NOTHING)) {
+                        if (accesslevel.equals(AccessLevel.NOTHING)) {
                             System.out.println(" Error: enter the correct number");
                             continue n;
                         } else {
                             break n;
                         }
                     }
-                    System.out.println(Manager.edituser(restaurantname, restaurantpass, username, edit, result, accesslevel));
+                    System.out.println(
+                            Manager.edituser(restaurantname, restaurantpass, username, edit, result, accesslevel));
+                    break m;
                 }
                 case "0" -> {
 
@@ -804,46 +796,48 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
 
+        System.out.println("-".repeat(34));
+
         System.out.print(" Enter your restaurant's name: ");
         String restaurantname = input.next();
 
         System.out.print(" Enter your restaurant's password: ");
         String restaurantpass = input.next();
-        
+
         System.out.print(" Are you sure? 1)yes 2)no \n select number: ");
         String result = input.next();
-        
-        switch(result){
-            
+
+        switch (result) {
+
             case "1" -> System.out.println(Manager.removerestaurant(restaurantname, restaurantpass));
             case "2" -> System.out.println(" canceled");
             default -> System.out.println(" Error: enter the correct number, try again");
         }
-        input.close();
     }
 
     private static void removeuser() {
-        
+
         Scanner input = new Scanner(System.in);
+
+        System.out.println("-".repeat(34));
 
         System.out.print(" Enter your restaurant's name: ");
         String restaurantname = input.next();
 
         System.out.print(" Enter your restaurant's password: ");
         String restaurantpass = input.next();
-        
+
         System.out.print(" Enter username: ");
         String username = input.next();
-        
+
         System.out.print(" Are you sure? 1)yes 2)no \n select number: ");
         String result = input.next();
-        
-        switch(result){
-            
+
+        switch (result) {
+
             case "1" -> System.out.println(Manager.removeuser(restaurantname, restaurantpass, username));
             case "2" -> System.out.println(" canceled");
             default -> System.out.println(" Error: enter the correct number, try again");
         }
-        input.close();
     }
 }

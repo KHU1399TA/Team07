@@ -21,7 +21,6 @@ public class Manager extends User {
             if (Restaurants.restaurants.get(i).restaurantname.equals(restaurant.restaurantname)) {
 
                 security = false;
-                break;
             }
 
             if (security) {
@@ -50,7 +49,6 @@ public class Manager extends User {
                     if (Restaurants.restaurants.get(i).users.get(j).username.equals(user.username)) {
 
                         security = false;
-                        break;
                     }
                 }
 
@@ -116,7 +114,7 @@ public class Manager extends User {
 
                 switch (result) {
                     case "1" ->
-                        Restaurants.restaurants.get(i).restaurantname = restaurantname;
+                        Restaurants.restaurants.get(i).restaurantname = edit;
                     case "2" ->
                         Restaurants.restaurants.get(i).typeofrestaurant = typeofrestaurant;
                     default ->
