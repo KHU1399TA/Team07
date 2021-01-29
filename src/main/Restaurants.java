@@ -6,6 +6,7 @@ import java.util.*;
 public class Restaurants {
     
     static ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
+    static ArrayList<User> clients = new ArrayList<User>();
     
     /*FileManager fileManager = new FileManager("src/resources/users.txt");
     

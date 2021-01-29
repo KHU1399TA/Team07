@@ -45,19 +45,28 @@ enum Typeofrestaurant{
 enum ActionResult{
     
     SUCCESSLOGIN(" [ Login done ]"),
-    SUCCESSADDUSER(" [ Adduser done ]"),
-    SUCCESSADDRESTAURANT(" [ Addrestaurant done ]"),
+    SUCCESSADD(" [ Add done ]"),
     SUCCESSSHOW(" [ Show done ]"),
     SUCCESSEDIT(" [ Edit done ]"),
     SUCCESSREMOVE(" [ Remove done ]"),
+    SUCCESSMADE(" [ Cook done ]"),
+    SUCCESSCONFIRMED(" [ Cook done ]"),
+    SUCCESSCOOKED(" [ Cook done ]"),
+    SUCCESSDELIVERED(" [ Cook done ]"),
+    
     USERNAME_NOT_FOUND(" [ Wrong username or password, try again ]"),
-    RESTAURANT_NOT_FOUND(" [ Restaurant not found, try again ]"),
     USERNAME_ALREADY_EXIST(" [ This username is already used, try again ]"),
+    
+    RESTAURANT_NOT_FOUND(" [ Restaurant not found, try again ]"),
     RESTAURANTNAME_ALREADY_EXIST(" [ This restaurantname is already used, try again ]"),
-    //FOOD_NOT_FOUND(""),
-    //FOOD_ALREADY_EXIST(""),
-    //ORDER_NOT_FOUND(""),
-    //ORDER_ALREADY_EXIST(""),
+    
+    FOOD_NOT_FOUND(" [ Food not found, try again ]"),
+    FOOD_ALREADY_EXIST(" [ This food is already used, try again ]"),
+    FOOD_NOT_AVAILABLE(" [ This food is not available, try again ]"),
+    
+    ORDER_NOT_FOUND(" [ Oeder not found, try again ]"),
+    ORDER_ALREADY_EXIST(" [ This order's id is already used, try again ]"),
+    
     UNKNOWN_ERROR(" Error: [ please try again ]");
     
     private String actionresult;
@@ -70,4 +79,23 @@ enum ActionResult{
     public String toString() {
         return actionresult;
     }    
+}
+
+enum OrderState {
+    
+    MADE(" [ Made done ]"),
+    CONFIRMED(" [ Confirmed done ]"),
+    COOKED(" [ Cook done ]"),
+    DELIVERED(" [ Deliver done ]");
+    
+    private String orderstate;
+    
+    OrderState(String orderstate) {
+        this.orderstate = orderstate;
+    }
+    
+    @Override
+    public String toString() {
+        return orderstate;
+    } 
 }

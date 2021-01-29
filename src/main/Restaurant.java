@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 public class Restaurant {
     
-    protected ArrayList<User> users = new ArrayList<User>();
-    protected String restaurantname;
-    protected String restaurantpass;
-    protected Typeofrestaurant typeofrestaurant;
+    ArrayList<User> users = new ArrayList<User>();
+    
+    String restaurantname;
+    String restaurantpass;
+    Typeofrestaurant typeofrestaurant;
 
     public Restaurant(String restaurantname, String restaurantpass, Typeofrestaurant typeofrestaurant) {
         this.restaurantname = restaurantname;

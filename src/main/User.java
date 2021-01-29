@@ -25,8 +25,6 @@ public abstract class User {
         this.lastLoginDate = lastLoginDate;
     }
 
-    
-    
     static ActionResult login(String restaurantname, String username, String password) {
 
         for (int i = 0; i < Restaurants.restaurants.size(); i++) {
