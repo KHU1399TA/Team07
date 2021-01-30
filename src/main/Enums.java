@@ -57,7 +57,7 @@ enum ActionResult{
     USERNAME_NOT_FOUND(" [ Wrong username or password, try again ]"),
     USERNAME_ALREADY_EXIST(" [ This username is already used, try again ]"),
     
-    RESTAURANT_NOT_FOUND(" [ Restaurant not found, try again ]"),
+    RESTAURANT_NOT_FOUND(" [ Wrong restaurant's name or password, try again ]"),
     RESTAURANTNAME_ALREADY_EXIST(" [ This restaurantname is already used, try again ]"),
     
     FOOD_NOT_FOUND(" [ Food not found, try again ]"),

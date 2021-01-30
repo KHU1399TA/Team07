@@ -31,9 +31,17 @@ public class Client extends User {
 
                 if (security) {
 
-                    Restaurants.restaurants.get(i).ordes.add(order);
-                    order.state = OrderState.MADE;
-                    return ActionResult.SUCCESSADD;
+                    for (int j = 0; j < Restaurants.restaurants.get(i).menu.size(); j++) {
+
+                        if (Restaurants.restaurants.get(i).menu.get(j).id == order.foodId) {
+
+                            Restaurants.restaurants.get(i).ordes.add(order);
+                            order.state = OrderState.MADE;
+                            return ActionResult.SUCCESSADD;
+                        }
+                    }
+
+                    return ActionResult.FOOD_NOT_FOUND;
                 } else {
 
                     return ActionResult.ORDER_ALREADY_EXIST;
@@ -90,15 +98,17 @@ public class Client extends User {
         return ActionResult.RESTAURANT_NOT_FOUND;
     }
 
-    static void showrestaurants() {
+    static ActionResult showrestaurants() {
 
         for (int i = 0; i < Restaurants.restaurants.size(); i++) {
 
             System.out.println(Restaurants.restaurants.get(i).toString());
         }
+
+        return ActionResult.SUCCESSSHOW;
     }
 
-    static void showfoods(String restaurantname) {
+    static ActionResult showfoods(String restaurantname) {
 
         for (int i = 0; i < Restaurants.restaurants.size(); i++) {
 
@@ -108,7 +118,11 @@ public class Client extends User {
 
                     System.out.println(Restaurants.restaurants.get(i).menu.get(j).toString());
                 }
+
+                return ActionResult.SUCCESSSHOW;
             }
         }
+
+        return ActionResult.RESTAURANT_NOT_FOUND;
     }
 }

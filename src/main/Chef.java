@@ -138,7 +138,7 @@ public class Chef extends User{
 
                     if(Restaurants.restaurants.get(i).ordes.get(j).state.equals(OrderState.CONFIRMED)){
                         
-                        Restaurants.restaurants.get(i).ordes.get(j).toString();
+                        System.out.println(Restaurants.restaurants.get(i).ordes.get(j).toString());
                     }
                 }
                         
@@ -182,7 +182,7 @@ public class Chef extends User{
 
                 for (int j = 0; j < Restaurants.restaurants.get(i).menu.size(); j++) {
 
-                    Restaurants.restaurants.get(i).menu.get(j).toString();
+                    System.out.println(Restaurants.restaurants.get(i).menu.get(j).toString());
                 }                 
                 
                 return ActionResult.SUCCESSSHOW;

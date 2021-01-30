@@ -24,7 +24,7 @@ public class Cashier extends User {
 
                     if(Restaurants.restaurants.get(i).ordes.get(j).state.equals(OrderState.MADE)){
                         
-                        Restaurants.restaurants.get(i).ordes.get(j).toString();
+                        System.out.println(Restaurants.restaurants.get(i).ordes.get(j).toString());
                     }
                 }
                         

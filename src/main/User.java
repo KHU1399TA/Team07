@@ -25,16 +25,57 @@ public abstract class User {
         this.lastLoginDate = lastLoginDate;
     }
 
-    static ActionResult login(String restaurantname, String username, String password) {
+    static ActionResult login(String restaurantname, String restaurantpass, String username, String password, String accesslevel) {
 
         for (int i = 0; i < Restaurants.restaurants.size(); i++) {
 
-            if (Restaurants.restaurants.get(i).restaurantname.equals(restaurantname)) {
+            if (Restaurants.restaurants.get(i).restaurantname.equals(restaurantname)
+                    && Restaurants.restaurants.get(i).restaurantpass.equals(restaurantpass)) {
 
                 for (int j = 0; j < Restaurants.restaurants.get(i).users.size(); j++) {
 
+                    boolean security = false;
+                    
+                    switch(accesslevel){
+                        
+                        case "manager" -> {
+                            
+                            if(Restaurants.restaurants.get(i).users.get(j).accessLevel.equals(AccessLevel.MANAGER)){
+                                
+                                security = true;
+                            }
+                            break;
+                        }
+                        case "chef" -> {
+                            
+                            if(Restaurants.restaurants.get(i).users.get(j).accessLevel.equals(AccessLevel.CHEF)){
+                                
+                                security = true;
+                            }
+                            break;
+                        }
+                        case "cashier" -> {
+                            
+                            if(Restaurants.restaurants.get(i).users.get(j).accessLevel.equals(AccessLevel.CASHIER)){
+                                
+                                security = true;
+                            }
+                            break;
+                        }
+                        case "deliveryman" -> {
+                            
+                            if(Restaurants.restaurants.get(i).users.get(j).accessLevel.equals(AccessLevel.DELIVERYMAN)){
+                                
+                                security = true;
+                            }
+                            break;
+                        }
+                        default -> security = false;
+                    }
+                    
                     if (Restaurants.restaurants.get(i).users.get(j).username.equals(username)
-                            && Restaurants.restaurants.get(i).users.get(j).password.equals(password)) {
+                            && Restaurants.restaurants.get(i).users.get(j).password.equals(password)
+                            && security) {
 
                         Date today = new Date();
                         Restaurants.restaurants.get(i).users.get(j).lastLoginDate = today;

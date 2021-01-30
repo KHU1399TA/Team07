@@ -38,7 +38,8 @@ public class Manager extends User {
 
         for (int i = 0; i < Restaurants.restaurants.size(); i++) {
 
-            if (Restaurants.restaurants.get(i).restaurantname.equals(restaurantname)) {
+            if (Restaurants.restaurants.get(i).restaurantname.equals(restaurantname)
+                    && Restaurants.restaurants.get(i).restaurantpass.equals(restaurantpass)) {
 
                 boolean security = true;
 
@@ -80,7 +81,7 @@ public class Manager extends User {
         return ActionResult.RESTAURANT_NOT_FOUND;
     }
 
-    static ActionResult showuserinfo(String restaurantname, String restaurantpass, String username) {
+    static ActionResult showuserinfo(String restaurantname, String restaurantpass, String username, String userpass) {
 
         for (int i = 0; i < Restaurants.restaurants.size(); i++) {
 
@@ -89,7 +90,8 @@ public class Manager extends User {
 
                 for (int j = 0; j < Restaurants.restaurants.get(i).users.size(); j++) {
 
-                    if (Restaurants.restaurants.get(i).users.get(j).username.equals(username)) {
+                    if (Restaurants.restaurants.get(i).users.get(j).username.equals(username)
+                            && Restaurants.restaurants.get(i).users.get(j).password.equals(userpass)) {
 
                         System.out.println(Restaurants.restaurants.get(i).users.get(j).toString());
                         return ActionResult.SUCCESSSHOW;
@@ -115,6 +117,8 @@ public class Manager extends User {
                     case "1" ->
                         Restaurants.restaurants.get(i).restaurantname = edit;
                     case "2" ->
+                    Restaurants.restaurants.get(i).restaurantpass = edit;
+                    case "3" ->
                         Restaurants.restaurants.get(i).typeofrestaurant = typeofrestaurant;
                     default ->
                         System.out.println(" Error: enter the correct number");
@@ -127,7 +131,7 @@ public class Manager extends User {
         return ActionResult.RESTAURANT_NOT_FOUND;
     }
 
-    static ActionResult edituser(String restaurantname, String restaurantpass, String username, String edit, String result, AccessLevel accessLevel) {
+    static ActionResult edituser(String restaurantname, String restaurantpass, String username,String userpass, String edit, String result, AccessLevel accessLevel) {
 
         for (int i = 0; i < Restaurants.restaurants.size(); i++) {
 
@@ -136,7 +140,8 @@ public class Manager extends User {
 
                 for (int j = 0; j < Restaurants.restaurants.get(i).users.size(); j++) {
 
-                    if (Restaurants.restaurants.get(i).users.get(j).username.equals(username)) {
+                    if (Restaurants.restaurants.get(i).users.get(j).username.equals(username)
+                            && Restaurants.restaurants.get(i).users.get(j).password.equals(userpass)) {
 
                         switch (result) {
                             case "1" ->
@@ -181,7 +186,7 @@ public class Manager extends User {
         return ActionResult.RESTAURANT_NOT_FOUND;
     }
 
-    static ActionResult removeuser(String restaurantname, String restaurantpass, String username) {
+    static ActionResult removeuser(String restaurantname, String restaurantpass, String username, String userpass) {
 
         for (int i = 0; i < Restaurants.restaurants.size(); i++) {
 
@@ -190,7 +195,8 @@ public class Manager extends User {
 
                 for (int j = 0; j < Restaurants.restaurants.get(i).users.size(); j++) {
 
-                    if (Restaurants.restaurants.get(i).users.get(j).username.equals(username)) {
+                    if (Restaurants.restaurants.get(i).users.get(j).username.equals(username)
+                            && Restaurants.restaurants.get(i).users.get(j).password.equals(userpass)) {
 
                         Restaurants.restaurants.get(i).users.remove(j);
                         return ActionResult.SUCCESSREMOVE;
